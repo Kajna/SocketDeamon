@@ -1,12 +1,11 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.1)
 project (SocketDeamon)
 
 add_executable(SocketDeamon src/main.cpp)
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-if(THREADS_HAVE_PTHREAD_ARG)
-    target_compile_options(PUBLIC SocketDeamon "-pthread")
-endif()
+target_link_libraries(TruckOcrServiceBackend Threads::Threads)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
